@@ -24,7 +24,7 @@ namespace NinjaBot{
     //% blockId=ninjaBot_Cservos_bias
     //% block="bias %biasDriving"
     //% bias.min=0 bias.max=100
-    //% group = "Continuous"
+    //% group="Configuration"
 
     export function biasDriving(bias: number): void {
         if (bias > 100) {
@@ -41,6 +41,7 @@ namespace NinjaBot{
 
     //% blockId=ninjaBot_Cservos_forward
     //% block="drive forward"
+    //% group="Continuous"
     
     export function forward(): void {
         let P8Output = 0;
@@ -63,6 +64,8 @@ namespace NinjaBot{
      */
     //% blockId=ninjaBot_Cservos_backward
     //% block="drive backward"
+    //% group="Continuous"
+
     export function backward(): void {
         let P8Output = 180;
         let P12Output = 0;
@@ -84,6 +87,8 @@ namespace NinjaBot{
     */
     //% blockId=ninjaBot_Cservos_left
     //% block="turn left"
+    //% group="Continuous"
+
     export function left(): void {
         pins.servoWritePin(AnalogPin.P8, 0);
         pins.servoWritePin(AnalogPin.P12, 0);
@@ -94,6 +99,8 @@ namespace NinjaBot{
      */
     //% blockId=ninjaBot_Cservos_right
     //% block="turn right"
+    //% group="Continuous"
+
     export function right(): void {
         pins.servoWritePin(AnalogPin.P8, 180);
         pins.servoWritePin(AnalogPin.P12, 180);
@@ -108,6 +115,8 @@ namespace NinjaBot{
      */
     //% blockId=ninjaBot_Cservos_stop
     //% block="stop"
+    //% group="Continuous"
+
     export function stop(): void {
         pins.analogWritePin(AnalogPin.P8, 0);
         pins.analogWritePin(AnalogPin.P12, 0);
@@ -119,6 +128,8 @@ namespace NinjaBot{
      */
     //% blockId=ninjaBot_Cservos_neutral
     //% block="goto neutral position"
+    //% group="Continuous"
+
     export function neutral(): void {
         pins.servoWritePin(AnalogPin.P8, 90);
         pins.servoWritePin(AnalogPin.P12, 90);
@@ -130,6 +141,8 @@ namespace NinjaBot{
      */
     //% blockId=ninjaBot_Cservos_drive_forwards
     //% block="drive forwards %howFar|distance" 
+    //% group="Continuous"
+
     export function driveForwards(howFar: number): void {
         let timeToWait = (howFar * milliSecInASecond) / distancePerSec; // calculation done this way round to avoid zero rounding
         forward();
@@ -143,6 +156,8 @@ namespace NinjaBot{
      */
     //% blockId=ninjaBot_Cservos_drive_backwards
     //% block="drive backwards %howFar|distance" 
+    //% group="Continuous"
+
     export function driveBackwards(howFar: number): void {
         let timeToWait = (howFar * milliSecInASecond) / distancePerSec; // calculation done this way round to avoid zero rounding
         backward();
@@ -159,6 +174,8 @@ namespace NinjaBot{
      */
     //% blockId=ninjaBot_Cservos_turn_right
     //% block="turn right %deg|degrees"
+    //% group="Continuous"
+
     export function turnRight(deg: number): void {
         let timeToWait = (deg * milliSecInASecond) / numberOfDegreesPerSec;// calculation done this way round to avoid zero rounding
         pins.servoWritePin(AnalogPin.P8, 130);
@@ -176,6 +193,8 @@ namespace NinjaBot{
     */
     //% blockId=ninjaBot_Cservos_turn_left
     //% block="turn left %deg|degrees"
+    //% group="Continuous"
+
     export function turnLeft(deg: number): void {
         let timeToWait = (deg * milliSecInASecond) / numberOfDegreesPerSec;// calculation done this way round to avoid zero rounding
         pins.servoWritePin(AnalogPin.P8, 50);
@@ -191,6 +210,8 @@ namespace NinjaBot{
      */
     //% blockId=ninjaBot_Cservos_set_turn_speed_param
     //% block="calibrate turn amount to %degPerSec|degrees per second" 
+    //% group="Configuration"
+
     export function setDegreesPerSecond(degPerSec: number): void {
         numberOfDegreesPerSec = degPerSec
     }
@@ -202,6 +223,8 @@ namespace NinjaBot{
      */
     //% blockId=ninjaBot_Cservos_set_movement_speed_param
     //% block="calibrate drive amount to %distPerSec|mm per second"
+    //% group="Configuration"
+
     export function setDistancePerSecond(distPerSec: number): void {
         distancePerSec = distPerSec
     }
