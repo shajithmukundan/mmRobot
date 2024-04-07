@@ -1,7 +1,9 @@
 /**
- * Blocks for driving the Makerminds NinjaBot
+ * Blocks for operating the Makerminds NinjaBot
  * 
-//% weight=70 color=#570529 icon="\uf1b9" block="Ninja:Bot" */
+ */
+//% weight=70 color=#570529 icon="\uf1b9" block="Ninja:Bot" 
+//% groups='["Positional", "Continuous", "Configuration"]'
 namespace NinjaBot{
     /**
      * **********************************************************************************************************************************************
@@ -14,7 +16,8 @@ namespace NinjaBot{
     let distancePerSec = 100
     let numberOfDegreesPerSec = 200
     let biasToApply = 50 //in the middle is the place to start
-    //% groups='["Positional", "Continuous", "Configuration"]'
+
+    
 
     /**
      * Apply a bias to the wheels. 0 to 50 for left, 50 to 100 for right.
@@ -36,14 +39,14 @@ namespace NinjaBot{
     }
 
     /**
-     * Drives forwards. Call stop to stop
+     * Roll forwards. Call stop to stop
      */
 
     //% blockId=ninjaBot_Cservos_forward
-    //% block="drive forward"
+    //% block="roll forward"
     //% group="Continuous"
     
-    export function forward(): void {
+    export function rollforward(): void {
         let P8Output = 0;
         let P12Output = 180;
 
@@ -60,13 +63,13 @@ namespace NinjaBot{
     }
 
     /**
-     * Drives backwards. Call stop to stop
+     * Rolls backwards. Call stop to stop
      */
     //% blockId=ninjaBot_Cservos_backward
-    //% block="drive backward"
+    //% block="roll backward"
     //% group="Continuous"
 
-    export function backward(): void {
+    export function rollbackward(): void {
         let P8Output = 180;
         let P12Output = 0;
 
@@ -83,10 +86,10 @@ namespace NinjaBot{
     }
 
     /**
-    * Turns left. Call stop to stop
+    * Rolls left. Call stop to stop
     */
     //% blockId=ninjaBot_Cservos_left
-    //% block="turn left"
+    //% block="roll left"
     //% group="Continuous"
 
     export function left(): void {
@@ -95,10 +98,10 @@ namespace NinjaBot{
     }
 
     /**
-     * Turns right. Call ``stop`` to stop
+     * Rolls right. Call ``stop`` to stop
      */
     //% blockId=ninjaBot_Cservos_right
-    //% block="turn right"
+    //% block="roll right"
     //% group="Continuous"
 
     export function right(): void {
@@ -140,40 +143,41 @@ namespace NinjaBot{
      * @param howFar distance to move
      */
     //% blockId=ninjaBot_Cservos_drive_forwards
-    //% block="drive forwards %howFar|distance" 
+    //% block="roll forwards %howFar|distance" 
     //% group="Continuous"
 
-    export function driveForwards(howFar: number): void {
+    export function rollForwards(howFar: number): void {
         let timeToWait = (howFar * milliSecInASecond) / distancePerSec; // calculation done this way round to avoid zero rounding
-        forward();
+        rollforward();
         basic.pause(timeToWait);
         stop();
     }
 
     /**
-     * Drives backwards the requested distance and then stops
+     * Rolls backwards the requested distance and then stops
      * @param howFar distance to move
      */
     //% blockId=ninjaBot_Cservos_drive_backwards
-    //% block="drive backwards %howFar|distance" 
+    //% block="roll backwards %howFar|distance" 
     //% group="Continuous"
 
-    export function driveBackwards(howFar: number): void {
+    export function rollBackwards(howFar: number): void {
         let timeToWait = (howFar * milliSecInASecond) / distancePerSec; // calculation done this way round to avoid zero rounding
-        backward();
+        rollbackward();
         basic.pause(timeToWait);
         stop();
     }
 
     /**
-     * Turns right through the requested degrees and then stops
+     * Rolls right through the requested degrees and then stops
      * needs NumberOfDegreesPerSec tuned to make accurate, as it uses
-     * a simple turn, wait, stop method.
+     * a simple roll right, wait, stop method.
      * Runs the servos at slower than the right function to reduce wheel slip
      * @param deg how far to turn, eg: 90
      */
-    //% blockId=ninjaBot_Cservos_turn_right
-    //% block="turn right %deg|degrees"
+
+    //% blockId=ninjaBot_Cservos_roll_right
+    //% block="roll right %deg|degrees"
     //% group="Continuous"
 
     export function turnRight(deg: number): void {
@@ -185,17 +189,18 @@ namespace NinjaBot{
     }
 
     /**
-    * Turns left through the requested degrees and then stops
+    * Rolls left through the requested degrees and then stops
     * needs NumberOfDegreesPerSec tuned to make accurate, as it uses
-    * a simple turn, wait, stop method.
+    * a simple roll left, wait, stop method.
     * Runs the servos at slower than the right function to reduce wheel slip
     * @param deg how far to turn, eg: 90
     */
-    //% blockId=ninjaBot_Cservos_turn_left
-    //% block="turn left %deg|degrees"
+
+    //% blockId=ninjaBot_Cservos_roll_left
+    //% block="roll left %deg|degrees"
     //% group="Continuous"
 
-    export function turnLeft(deg: number): void {
+    export function rollLeft(deg: number): void {
         let timeToWait = (deg * milliSecInASecond) / numberOfDegreesPerSec;// calculation done this way round to avoid zero rounding
         pins.servoWritePin(AnalogPin.P8, 50);
         pins.servoWritePin(AnalogPin.P12, 50);
